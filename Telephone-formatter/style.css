@@ -1,0 +1,9 @@
+*{
+    box-sizing: border-box;
+}
+.main{
+    text-align: center;
+}
+.number{
+    font-size: 1.5rem;
+}
