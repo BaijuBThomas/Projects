@@ -1,0 +1,17 @@
+.star-container{
+        display: flex;
+        text-align: center;
+        gap: 25px;
+        list-style-type: none;
+        
+    }
+.star {
+    color: lightgray;
+  font-size: 40px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.highLight{
+    color: gold;
+}
