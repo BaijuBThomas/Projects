@@ -1,0 +1,39 @@
+.main {
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    
+}
+
+.sub-main{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    text-align: center;
+    background: #b4161b;
+    background: linear-gradient(145deg, #cacaca, #f0f0f0);
+    border-radius: 50%;
+    box-shadow: 0 0 20px #bebebe;
+}
+
+.stopwatch{
+    font-size: 30px;
+    font-weight: 900;
+    
+}
+.time{
+    font-size: 30px;
+    font-weight: 900;
+    color: #b4161b; 
+}
+.start,.pause,.reset{
+    background: linear-gradient(-45deg, #9c969d, #a4cede);
+    border-radius: 12px;
+    cursor: pointer;
+}
