@@ -1,4 +1,4 @@
-let inputButton = document.querySelector('.input');
+let inputField  = document.querySelector('.input');
 let plus = document.querySelector('.plus');
 let minus = document.querySelector('.minus');
 let reset = document.querySelector('.reset');
@@ -6,22 +6,22 @@ let reset = document.querySelector('.reset');
 let count = 0;
 
 plus.addEventListener('click' ,()=>{
-    count = inputButton.value;
+    count = inputField .value;
      count++;
-    inputButton.value = count;  
+    inputField .value = count;  
    
 });
 minus.addEventListener('click' ,()=>{
-    count = inputButton.value;
+    count = inputField .value;
    if(count> 0){
      count--;
-    inputButton.value = count;  
+    inputField .value = count;  
    
    }
 });
 reset.addEventListener('click' ,()=>{
     count = 0;
-    inputButton.value = count;  
+    inputField .value = count;  
    
 });
 
