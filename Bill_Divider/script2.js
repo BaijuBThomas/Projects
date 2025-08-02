@@ -56,3 +56,22 @@ generateBill.addEventListener('click',()=>{
 
     resetButton.disabled = false;
 });
+
+resetButton.addEventListener('click',()=>{
+    amountInputField.value = '';
+    tipInputField.value= '';
+    numberOfPeople.value = '';
+
+    tipAmountM.textContent = '';
+    finalAmount.textContent = '';
+    eachPersonAmount.textContent = '';
+    selectedTip = '';
+
+    tipButton.forEach(btn => btn.classList.remove('selected'));
+     tipContainer.classList.add('disabled');
+    tipInputField.disabled = true;
+    numberOfPeople.disabled = true;
+    generateBill.disabled = true;
+    resetButton.disabled = true;
+
+});
