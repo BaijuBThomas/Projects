@@ -1,77 +1,86 @@
+// Element Selectors
 const amountInputField = document.querySelector('#bill-amount');
 const tipContainer = document.querySelector('.tip-container');
-const tipButton = document.querySelectorAll('.tip');
+const tipButtons = document.querySelectorAll('.tip');
 const tipInputField = document.querySelector('.custom-tip');
 const numberOfPeople = document.querySelector('.number-of-people');
-const generateBill = document.querySelector('.generate-bill-btn');
-
-const tipAmountM = document.querySelector('.tip-amount span');
-const finalAmount = document.querySelector('.total span');
-const eachPersonAmount = document.querySelector('.each-person-bill span');
+const generateBillBtn = document.querySelector('.generate-bill-btn');
 const resetButton = document.querySelector('.reset-btn');
 
+const tipAmountDisplay = document.querySelector('.tip-amount span');
+const totalAmountDisplay = document.querySelector('.total span');
+const perPersonAmountDisplay = document.querySelector('.each-person-bill span');
 
 let selectedTip = '';
 
-amountInputField.addEventListener('input', ()=>{
-   let initialAmount = amountInputField.value;
-    if(initialAmount >=0){
-        tipContainer.classList.remove('disabled');
-        tipInputField.disabled = false;
-        numberOfPeople.disabled = false;
-        generateBill.disabled = false;
+// Helper function: Enable or disable input fields
+function toggleInputs(enabled) {
+    tipContainer.classList.toggle('disabled', !enabled);
+    tipInputField.disabled = !enabled;
+    numberOfPeople.disabled = !enabled;
+    generateBillBtn.disabled = !enabled;
+}
+
+// On bill amount input
+amountInputField.addEventListener('input', () => {
+    const billAmount = parseFloat(amountInputField.value);
+    if (!isNaN(billAmount) && billAmount >= 0) {
+        toggleInputs(true);
+    } else {
+        toggleInputs(false);
     }
 });
 
-tipButton.forEach(button =>{
-    button.addEventListener('click',()=>{ 
-     tipButton.forEach(btn => btn.classList.remove('selected'));
-     button.classList.add('selected');
-     selectedTip = button.textContent.replace('%','');
-     tipInputField.value='';
-});
-});
-
-tipInputField.addEventListener('input',()=>{
-    selectedTip =  tipInputField.value;
-    tipButton.forEach(btn => btn.classList.remove('selected'));
+// On tip button click
+tipButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        tipButtons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+        selectedTip = parseFloat(button.textContent.replace('%', ''));
+        tipInputField.value = '';
+    });
 });
 
-generateBill.addEventListener('click',()=>{
-    let initialAmount = parseFloat(amountInputField.value)
-    let eachPersonBill = parseInt(numberOfPeople.value)
+// On custom tip input
+tipInputField.addEventListener('input', () => {
+    selectedTip = parseFloat(tipInputField.value);
+    tipButtons.forEach(btn => btn.classList.remove('selected'));
+});
 
-    let tipAmount = (initialAmount*selectedTip)/100
-    console.log(tipAmount);
-    let total = tipAmount + initialAmount; 
-    console.log(total);
-    let split = total/eachPersonBill;
-    console.log(split);
-
+// Generate bill
+generateBillBtn.addEventListener('click', () => {
+    const billAmount = parseFloat(amountInputField.value);
+    const peopleCount = parseInt(numberOfPeople.value);
     
+    if (isNaN(billAmount) || isNaN(selectedTip) || isNaN(peopleCount) || peopleCount <= 0) {
+        alert('Please enter valid inputs (bill amount, tip, and number of people).');
+        return;
+    }
 
-    tipAmountM.textContent = `${tipAmount.toFixed(2)}`;
-    finalAmount.textContent = `${total.toFixed(2)}`;
-    eachPersonAmount.textContent = `${split.toFixed(2)}`;
+    const tipAmount = (billAmount * selectedTip) / 100;
+    const totalAmount = billAmount + tipAmount;
+    const perPerson = totalAmount / peopleCount;
+
+    tipAmountDisplay.textContent = tipAmount.toFixed(2);
+    totalAmountDisplay.textContent = totalAmount.toFixed(2);
+    perPersonAmountDisplay.textContent = perPerson.toFixed(2);
 
     resetButton.disabled = false;
 });
 
-resetButton.addEventListener('click',()=>{
+// Reset everything
+resetButton.addEventListener('click', () => {
     amountInputField.value = '';
-    tipInputField.value= '';
+    tipInputField.value = '';
     numberOfPeople.value = '';
 
-    tipAmountM.textContent = '';
-    finalAmount.textContent = '';
-    eachPersonAmount.textContent = '';
+    tipAmountDisplay.textContent = '';
+    totalAmountDisplay.textContent = '';
+    perPersonAmountDisplay.textContent = '';
+
     selectedTip = '';
+    tipButtons.forEach(btn => btn.classList.remove('selected'));
+    toggleInputs(false);
 
-    tipButton.forEach(btn => btn.classList.remove('selected'));
-     tipContainer.classList.add('disabled');
-    tipInputField.disabled = true;
-    numberOfPeople.disabled = true;
-    generateBill.disabled = true;
     resetButton.disabled = true;
-
 });
