@@ -35,17 +35,17 @@ showToastBtn.addEventListener('click', () => {
       newToast.classList.add('go-left')
     }
     setTimeout(() => {
-      newToast.remove()
+      newToast.remove();
     }, 100)
   }
 
   closeIcon.addEventListener('click', () => {
-    removeToast()
+    removeToast();
   })
 
   setTimeout(() => {
     removeToast()
   }, parseInt(durationInput.value) * 1000)
 
-  toastsContainer.append(newToast)
+  toastsContainer.append(newToast);
 })
