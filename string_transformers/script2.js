@@ -36,6 +36,7 @@ const removeSpaces = str => str.replace(/\s+/g, '');
 
 function updateScreen() {
   const text = input.value.trim();
+  console.log(`Current input: "${text}"`);
 
   outputs.lower.textContent = text.toLowerCase();
   outputs.upper.textContent = text.toUpperCase();
@@ -44,6 +45,15 @@ function updateScreen() {
   outputs.snake.textContent = toSnakeCase(text);
   outputs.kebab.textContent = toKebabCase(text);
   outputs.trimmed.textContent = removeSpaces(text);
+
+  // Add title tooltips for better UX
+  outputs.lower.title = "Lowercase version";
+  outputs.upper.title = "Uppercase version";
+  outputs.camel.title = "CamelCase version";
+  outputs.pascal.title = "PascalCase version";
+  outputs.snake.title = "Snake_case version";
+  outputs.kebab.title = "Kebab-case version";
+  outputs.trimmed.title = "No-spaces version";
 }
 
 updateScreen();
